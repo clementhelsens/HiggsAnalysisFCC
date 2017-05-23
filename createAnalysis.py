@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-import subprocess, glob, optparse, json, ast, os
+import subprocess, glob, optparse, json, ast, os, sys
 from pprint import pprint
 import ntpath
 import importlib
-
 #_____________________________________________________________________________
 def options():
     parser = optparse.OptionParser(description="analysis parser")
@@ -40,6 +39,7 @@ def main():
 
     # param file
     paramFile = ops.param_file
+    sys.path.append(os.path.dirname(os.path.expanduser(paramFile)))
     param = importlib.import_module(os.path.splitext(ntpath.basename(paramFile))[0])
 
     # use binned samples or not
