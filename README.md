@@ -8,5 +8,4 @@ Example:
 ```
 
 ```
-./createAnalysis.py -n hmumu -c ../heppy/test/analysis_pp_hmumu.py -t ../HeppyTrees/hmumu_v2 -o test -p templates/hmumu_params.py
-```
+./createAnalysis.py -n hmumu -c ../../heppy/test/analysis_pp_hmumu.py -t ../HeppyTrees/hmumu_v2 -o ../analysis_hmumu_v2 -p templates/hmumu_params.py```
