@@ -562,12 +562,12 @@ def produceStackedPlots(processes, selections, variables, colors, intLumi, pdir,
                  hh.Scale(intLumi)
                  histos.append(hh)
                  cols.append(colors[p])
-		 if i > 0: 
+                 if i > 0: 
                      leg.AddEntry(hh,p,"f")
                  else: 
                      leg.AddEntry(hh,p,"l")
                  i+=1
-             drawStack(filename, yl, leg, lt, rt, ff, pdir, log, stacksig, histos, colors)
+             drawStack(filename, yl, leg, lt, rt, ff, pdir, log, stacksig, histos, cols)
     print 'DONE.'
 
 #_____________________________________________________________________________________________________________
@@ -610,20 +610,11 @@ def drawStack(name, ylabel, legend, leftText, rightText, format, directory, logY
 
     # define stacked histo
     hStack = ROOT.THStack("hstack","")
-    colors = []
-    colors.append(ROOT.kYellow);
-    colors.append(ROOT.kGreen+2);
-    colors.append(ROOT.kBlue);
-    colors.append(ROOT.kMagenta+1);
-    colors.append(ROOT.kBlue-3);
-    colors.append(ROOT.kViolet+5);
-    colors.append(ROOT.kGreen+2);
-   
+
     # first plot backgrounds
          
     histos[1].SetLineWidth(0)
-    histos[1].SetLineColor(ROOT.kBlack)
-    histos[1].SetFillColor(colors[0])
+    histos[1].SetFillColor(colors[1])
     
     hStack.Add(histos[1])
     
@@ -632,7 +623,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, format, directory, logY
     next(iterh)
     next(iterh)
     
-    k = 1
+    k = 2
     for h in iterh:
        h.SetLineWidth(0)
        h.SetLineColor(ROOT.kBlack)
@@ -643,7 +634,7 @@ def drawStack(name, ylabel, legend, leftText, rightText, format, directory, logY
     
     # finally add signal on top
     histos[0].SetLineWidth(3)
-    histos[0].SetLineColor(ROOT.kRed+1)
+    histos[0].SetLineColor(colors[0])
     
     if stacksig:
         hStack.Add(histos[0])
