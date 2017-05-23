@@ -84,7 +84,7 @@ def main():
        eff = procDict[p]['matchingEfficiency']
        kf = procDict[p]['kfactor']
 
-       tree = '{}/{}/{}'.format(treeDir, p, treePath)
+       tree = '{}/{}/{}'.format(os.path.abspath(treeDir), p, treePath)
 
        matched_xsec = xsec*eff
        
