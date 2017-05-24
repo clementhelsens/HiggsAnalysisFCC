@@ -64,7 +64,7 @@ def main():
     os.system('cp tools.py {}'.format(analysisDir))
     os.system('cp {} {}'.format(paramFile, analysisDir))
     
-    analysisFile = '{}/analysis_{}.py'.format(analysisDir, analysisName)
+    analysisFile = '{}/analysis.py'.format(analysisDir)
     template = open(analysisFile, 'w')
     template.write('#!/usr/bin/env python\n')
     template.write('import collections\n')
@@ -107,15 +107,15 @@ def main():
     #form groups according to param file
     for name, procs in param.groups.iteritems():
         template.write('    block["{}"] = [\n'.format(name))
-	for procstr in procs:
+        for procstr in procs:
             for proc in processes:
-	        if binned:
-	            if procstr in proc and 'HT' in proc:
-		        template.write('                    {},\n'.format(proc))
-		else:
-		    if procstr in proc and 'HT' not in proc:
-		        template.write('                    {},\n'.format(proc))
-	template.write('                  ]\n'.format(name))
+                if binned:
+                    if procstr in proc and 'HT' in proc:
+                        template.write('                    {},\n'.format(proc))
+                else:
+                    if procstr in proc and 'HT' not in proc:
+                        template.write('                    {},\n'.format(proc))
+        template.write('                  ]\n'.format(name))
     
     template.write('\n')
     template.write('#_________________________________________________________________________________________________\n')
