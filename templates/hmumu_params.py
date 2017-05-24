@@ -1,10 +1,12 @@
 import ROOT
+import collections
 
 ### variable list
 variables = {
-    "pth":{"name":"higgs_pt","title":"p_{T}^{H} [GeV]","bin":50,"xmin":0,"xmax":500},
+    "pth":{"name":"higgs_pt","title":"p_{T}^{H} [GeV]","bin":50,"xmin":0,"xmax":1000},
+    "pthl":{"name":"higgs_pt","title":"p_{T}^{H} [GeV]","bin":50,"xmin":0,"xmax":5000},
     "mhl":{"name":"higgs_m","title":"m_{H} [GeV]","bin":75,"xmin":50,"xmax":2000},
-    "mh":{"name":"higgs_m","title":"m_{H} [GeV]","bin":25,"xmin":100,"xmax":150},
+    "mh":{"name":"higgs_m","title":"m_{H} [GeV]","bin":50,"xmin":50,"xmax":150},
     "ptmu_1":{"name":"mu1_pt","title":"p_{T}^{#mu, max} [GeV]","bin":100,"xmin":20,"xmax":500},
     "ptmu_2":{"name":"mu2_pt","title":"p_{T}^{#mu, min} [GeV]","bin":100,"xmin":20,"xmax":500},
     "nljets":{"name":"njets","title":"N_{jets}^{l}","bin":4,"xmin":-0.5,"xmax":3.5},
@@ -16,31 +18,29 @@ variables = {
 colors = {}
 colors['H'] = ROOT.kRed
 colors['tt'] = ROOT.kYellow
-colors['DY'] = ROOT.kGreen+1
+colors['DY'] = ROOT.kGreen+2
 colors['VV'] = ROOT.kBlue
 
-groups = { 
-           'H':  ['pp_h012j_5f', 'pp_vbf_h01j_5f', 'pp_tth01j_5f', 'pp_vh01j_5f'],
-           'tt': ['pp_tt012j_5f'],
-           'DY': ['pp_v0123j_5f', 'pp_ll012j_5f'], 
-           'VV': ['pp_vv012j_5f', 'pp_llv01j_5f']
-         }
+groups = collections.OrderedDict()
+groups['H'] = ['pp_h012j_5f', 'pp_vbf_h01j_5f', 'pp_tth01j_5f', 'pp_vh01j_5f']
+groups['tt'] = ['pp_tt012j_5f']
+groups['DY'] = ['pp_v0123j_5f', 'pp_ll012j_5f'] 
+groups['VV'] = ['pp_vv012j_5f', 'pp_llv01j_5f']
 
 ### signal and background uncertainties hypothesis
 uncertainties = []
 uncertainties.append([0., 0.])
-uncertainties.append([0.01, 0.0])
-uncertainties.append([0.01, 0.005])
-uncertainties.append([0.01, 0.01])
-uncertainties.append([0.03, 0.05])
+uncertainties.append([0.02, 0.0])
+uncertainties.append([0.02, 0.02])
+uncertainties.append([0.02, 0.10])
 
 # global parameters
 intLumi = 3.0e+07
 delphesVersion = '3.4.1'
 
 # for pt dependent analysis
-ptmax = 500.
-nsteps = 5
+ptmax = 2500.
+nsteps = 25
 
 # the first time needs to be set to True
 runFull = True
